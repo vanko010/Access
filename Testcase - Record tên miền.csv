@@ -1,0 +1,228 @@
+Page:,Access - Hiển thị Record tên miền,,,Page List,Total Testcase,,Testcase:                              PASS,Testcase:              PENDING
+URL:,https://support.pavietnam.vn/index.php?pa=paproject&pid=1436337,,,,0,,0,0
+ID,Description,Step,Data Test,Expected Result,Actual Result,Status,Comment,Picture
+1,Kiểm tra giao diện hiển thị đầy đủ các cột thông tin cho bản ghi DNS.,"Truy cập trang quản lý bản ghi DNS.
+Quan sát bảng hiển thị danh sách bản ghi.",Danh sách bản ghi DNS có sẵn.,"Bảng hiển thị đầy đủ các cột: SST, Host, Loại, Giá trị, TTL, Ưu tiên, Thao tác.","Bảng hiển thị đầy đủ các cột: SST, Host, Loại, Giá trị, TTL, Ưu tiên, Thao tác.",PASS,,
+2,Kiểm tra dữ liệu hiển thị trên giao diện khớp với dữ liệu trả về từ API.,"Truy cập trang quản lý bản ghi DNS.
+Lấy dữ liệu bản ghi từ API (sử dụng công cụ DevTools hoặc API client).
+So sánh dữ liệu hiển thị trên giao diện với dữ liệu từ API cho một số bản ghi ngẫu nhiên.",Dữ liệu bản ghi từ API và dữ liệu hiển thị trên giao diện.,"Dữ liệu hiển thị trên giao diện (Host, Loại, Giá trị, TTL, Ưu tiên) khớp chính xác với dữ liệu từ API cho từng bản ghi.","Dữ liệu hiển thị trên giao diện (Host, Loại, Giá trị, TTL, Ưu tiên) khớp chính xác với dữ liệu từ API cho từng bản ghi.",PASS,,
+3,Kiểm tra trường 'Loại' hiển thị đúng loại bản ghi DNS.,"Truy cập trang quản lý bản ghi DNS.
+Kiểm tra bản ghi có các loại khác nhau (A, CNAME, MX, TXT, SRV, v.v.).
+Quan sát giá trị hiển thị trong cột 'Loại' cho từng bản ghi.",Các bản ghi DNS với các loại khác nhau.,"Cột 'Loại' hiển thị chính xác tên loại bản ghi (A, CNAME, MX, URL REDIRECT, TXT, URL FRAME, NS, SRV, AAAA, TYPE257, CAA, ACNAME) cho từng dòng.","Cột 'Loại' hiển thị chính xác tên loại bản ghi (A, CNAME, MX, URL REDIRECT, TXT, URL FRAME, NS, SRV, AAAA, TYPE257, CAA, ACNAME) cho từng dòng.",PASS,,
+4,Kiểm tra trường 'Ưu tiên' chỉ hiển thị ô nhập liệu khi 'Loại' là MX hoặc SRV.,"Truy cập trang quản lý bản ghi DNS.
+Kiểm tra các bản ghi có loại MX, SRV, A, CNAME, TXT.
+Quan sát cột 'Ưu tiên' ở trạng thái đọc (read-only).","Các bản ghi DNS thuộc các loại khác nhau (MX, SRV, A, CNAME, TXT).","Cột 'Ưu tiên' hiển thị giá trị (nếu có) nhưng không phải ô nhập liệu cho các loại A, CNAME, TXT.
+Khi chuyển bản ghi MX hoặc SRV sang chế độ chỉnh sửa, cột 'Ưu tiên' hiển thị ô nhập liệu.","Cột 'Ưu tiên' hiển thị giá trị (nếu có) nhưng không phải ô nhập liệu cho các loại A, CNAME, TXT.
+Khi chuyển bản ghi MX hoặc SRV sang chế độ chỉnh sửa, cột 'Ưu tiên' hiển thị ô nhập liệu.",PASS,,
+5,"Kiểm tra hiển thị đúng các nút thao tác (Chỉnh sửa, Xóa) cho bản ghi hiện có và (Xác nhận thay đổi, Bỏ qua thay đổi) khi ở chế độ chỉnh sửa.","Truy cập trang quản lý bản ghi DNS.
+Quan sát các bản ghi hiện có (không phải dòng thêm mới).
+Click vào icon 'Chỉnh sửa' của một bản ghi.",Danh sách bản ghi DNS hiện có.,"Các bản ghi hiện có (không phải dòng thêm mới) hiển thị icon 'Chỉnh sửa' và 'Xóa'.
+Khi click 'Chỉnh sửa', icon 'Chỉnh sửa' và 'Xóa' biến mất, thay thế bằng nút 'Khôi phục' và 'Xóa'.","Các bản ghi hiện có (không phải dòng thêm mới) hiển thị icon 'Chỉnh sửa' và 'Xóa'.
+Khi click 'Chỉnh sửa', icon 'Chỉnh sửa' và 'Xóa' biến mất, thay thế bằng nút 'Khôi phục' và 'Xóa'.",PASS,,
+6,Kiểm tra hiển thị đúng thông tin Weight và Port cho loại bản ghi SRV.,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại SRV.
+Quan sát các trường thông tin của bản ghi SRV.",Một bản ghi DNS loại SRV có sẵn với thông tin Weight và Port.,Bản ghi loại SRV hiển thị thêm các trường 'Weight' và 'Port' với giá trị tương ứng từ API.,Bản ghi loại SRV hiển thị thêm các trường 'Weight' và 'Port' với giá trị tương ứng từ API.,PASS,,
+7,Kiểm tra hiển thị đúng Service và Protocol (tách từ trường Name) cho loại bản ghi SRV.,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại SRV có trường 'Host' dạng '_service._protocol'.
+Quan sát cách trường 'Host' được hiển thị.",Một bản ghi DNS loại SRV có sẵn với Host là '_sip._tcp'.,Trường 'Host' của bản ghi SRV được tách thành hai phần 'Service' (_sip) và 'Protocol' (_tcp) và hiển thị đúng trên giao diện (có thể là 2 ô nhập/hiển thị riêng hoặc hiển thị chung nhưng rõ ràng cấu trúc).,Trường 'Host' của bản ghi SRV được tách thành hai phần 'Service' (_sip) và 'Protocol' (_tcp) và hiển thị đúng trên giao diện (có thể là 2 ô nhập/hiển thị riêng hoặc hiển thị chung nhưng rõ ràng cấu trúc).,PASS,,
+8,Kiểm tra hiển thị đúng Flags và Tag cho loại bản ghi CAA.,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại CAA.
+Quan sát các trường thông tin của bản ghi CAA.",Một bản ghi DNS loại CAA có sẵn với thông tin Flags và Tag.,Bản ghi loại CAA hiển thị thêm các trường 'Flags' và 'Tag' với giá trị tương ứng từ API.,Flags giá trị 0 thì không hiển thị ,FAIL,,
+9,Kiểm tra hiển thị icon (i) cho loại bản ghi URL Frame.,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại URL FRAME.
+Quan sát bản ghi đó.",Một bản ghi DNS loại URL FRAME có sẵn.,Bản ghi loại URL FRAME hiển thị icon thông tin (i) bên cạnh.,Bản ghi loại URL FRAME hiển thị icon thông tin (i) bên cạnh.,PASS,,
+10,Kiểm tra tiêu đề (title) của URL Frame được load từ hidden field và hiển thị trong popup khi click icon (i).,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại URL FRAME có tiêu đề.
+Click vào icon (i) của bản ghi đó.
+Quan sát popup hiển thị.",Một bản ghi DNS loại URL FRAME có sẵn với tiêu đề 'Tiêu đề mẫu'.,Popup 'Nhập tiêu đề' hiển thị với trường nhập liệu chứa giá trị 'Tiêu đề mẫu' (được load từ hidden field).,Popup 'Nhập tiêu đề' hiển thị với trường nhập liệu chứa giá trị 'Tiêu đề mẫu' (được load từ hidden field).,PASS,,
+11,Kiểm tra tiêu đề (title) của URL Frame được lưu vào hidden field sau khi chỉnh sửa trong popup và nhấn 'Xác nhận'.,"Truy cập trang quản lý bản ghi DNS.
+Tìm một bản ghi loại URL FRAME.
+Click vào icon (i), chỉnh sửa tiêu đề trong popup.
+Nhấn nút 'Xác nhận' trong popup.
+(Kiểm tra bằng cách inspect element hoặc theo dõi dữ liệu gửi đi khi lưu cấu hình).","Một bản ghi DNS loại URL FRAME.
+Tiêu đề mới nhập trong popup: 'Tiêu đề đã chỉnh sửa'.","Sau khi nhấn 'Xác nhận', giá trị 'Tiêu đề đã chỉnh sửa' được lưu vào hidden field tương ứng với bản ghi URL FRAME đó.","Sau khi nhấn 'Xác nhận', giá trị 'Tiêu đề đã chỉnh sửa' được lưu vào hidden field tương ứng với bản ghi URL FRAME đó.",PASS,,
+12,Kiểm tra chức năng tạo bản ghi mẫu hoạt động chính xác.,"Truy cập trang quản lý bản ghi DNS.
+Click vào nút 'Bản ghi mẫu'.",Trang quản lý bản ghi DNS trống hoặc có sẵn một vài bản ghi.,Hệ thống thêm một hoặc nhiều bản ghi mẫu vào danh sách hiển thị trên giao diện.,,PENDING,,
+13,Kiểm tra dữ liệu bản ghi mẫu được tạo có hợp lệ và đúng định dạng cho từng loại.,"Truy cập trang quản lý bản ghi DNS.
+Click vào nút 'Bản ghi mẫu'.
+Kiểm tra các bản ghi mẫu vừa được thêm vào.",Các bản ghi mẫu được tạo tự động.,"Các bản ghi mẫu có dữ liệu (Host, Loại, Giá trị, TTL, Ưu tiên, v.v.) hợp lệ và đúng định dạng theo quy tắc của từng loại bản ghi (A, CNAME, MX, v.v.).",,PENDING,,
+14,Kiểm tra chức năng xuất danh sách bản ghi ra file CSV hoạt động chính xác.,"Truy cập trang quản lý bản ghi DNS có sẵn một số bản ghi.
+Click vào nút 'Xuất tệp CSV'.",Danh sách bản ghi DNS hiện có.,Trình duyệt bắt đầu tải xuống một file có định dạng CSV.,,PENDING,,
+15,Kiểm tra nội dung file CSV được xuất ra đầy đủ và đúng định dạng.,"Thực hiện xuất file CSV.
+Mở file CSV vừa tải xuống bằng trình soạn thảo văn bản hoặc bảng tính.
+Kiểm tra nội dung file.",File CSV được xuất ra.,"File CSV chứa đầy đủ các bản ghi hiển thị trên giao diện, mỗi bản ghi là một dòng, các trường được phân tách bằng dấu phẩy (hoặc dấu phân cách quy định), và có dòng tiêu đề cột.",,PENDING,,
+16,Kiểm tra tên file CSV được đặt theo quy tắc.,"Thực hiện xuất file CSV.
+Quan sát tên file được tải xuống.",File CSV được xuất ra.,Tên file CSV tuân theo quy tắc đặt tên (ví dụ: chứa tên miền và/hoặc ngày giờ xuất).,,PENDING,,
+17,Kiểm tra encoding của file CSV là UTF-8.,"Thực hiện xuất file CSV.
+Mở file CSV bằng trình soạn thảo văn bản hỗ trợ hiển thị encoding (ví dụ: Notepad++, VS Code).
+Kiểm tra thông tin encoding của file.",File CSV được xuất ra có chứa ký tự tiếng Việt hoặc ký tự đặc biệt.,Encoding của file CSV là UTF-8. Các ký tự tiếng Việt hoặc đặc biệt hiển thị đúng.,,PENDING,,
+18,Kiểm tra chức năng nhập bản ghi từ file CSV hoạt động chính xác.,"Chuẩn bị một file CSV hợp lệ chứa các bản ghi DNS.
+Truy cập trang quản lý bản ghi DNS.
+Click vào nút 'Nhập tệp CSV'.
+Chọn file CSV đã chuẩn bị và xác nhận nhập.",File CSV hợp lệ chứa các bản ghi DNS.,Hệ thống xử lý file CSV và hiển thị các bản ghi từ file lên giao diện (ở trạng thái chờ lưu).,,PENDING,,
+19,"Kiểm tra định dạng file CSV được hỗ trợ (encoding, delimiter).","Chuẩn bị các file CSV với định dạng khác nhau (UTF-8 phẩy, UTF-8 chấm phẩy, ANSI phẩy).
+Thực hiện nhập từng file CSV.",Các file CSV với encoding và delimiter khác nhau.,"Hệ thống nhập thành công các file CSV theo định dạng được hỗ trợ (ví dụ: UTF-8, dấu phẩy). Hệ thống hiển thị thông báo lỗi rõ ràng cho các định dạng không hỗ trợ.",,PENDING,,
+20,"Kiểm tra xử lý lỗi khi file CSV không đúng định dạng (không phải CSV, cấu trúc sai).","Chuẩn bị một file không phải CSV (ví dụ: .txt, .jpg) hoặc file CSV có cấu trúc cột sai.
+Thực hiện nhập file này.",File không phải CSV hoặc file CSV có cấu trúc sai.,Hệ thống hiển thị thông báo lỗi rõ ràng cho biết file không đúng định dạng hoặc cấu trúc không hợp lệ và không thực hiện nhập.,,PENDING,,
+21,"Kiểm tra xử lý lỗi khi dữ liệu trong file CSV không hợp lệ (ví dụ: IP sai định dạng, TTL âm).","Chuẩn bị file CSV chứa các bản ghi có dữ liệu không hợp lệ (ví dụ: bản ghi A với giá trị không phải IP, TTL âm, loại bản ghi không tồn tại).
+Thực hiện nhập file này.",File CSV chứa dữ liệu bản ghi không hợp lệ.,Hệ thống hiển thị thông báo lỗi cho biết dòng/bản ghi nào trong file có dữ liệu không hợp lệ và không nhập các bản ghi lỗi đó (hoặc nhập các bản ghi hợp lệ và đánh dấu các bản ghi lỗi).,,PENDING,,
+22,Kiểm tra dữ liệu được nhập từ file CSV hiển thị chính xác trên giao diện.,"Chuẩn bị file CSV hợp lệ chứa các bản ghi.
+Thực hiện nhập file CSV.
+Quan sát các bản ghi được hiển thị sau khi nhập.",File CSV hợp lệ chứa các bản ghi DNS.,"Các bản ghi hiển thị trên giao diện sau khi nhập khớp chính xác với dữ liệu trong file CSV (bao gồm Host, Loại, Giá trị, TTL, Ưu tiên, v.v.).",,PENDING,,
+23,Kiểm tra số lượng bản ghi được nhập không vượt quá giới hạn cho phép.,"Kiểm tra giới hạn số lượng bản ghi tối đa.
+Chuẩn bị file CSV chứa số lượng bản ghi vượt quá giới hạn.
+Thực hiện nhập file CSV.",File CSV chứa số lượng bản ghi vượt quá giới hạn cho phép.,Hệ thống hiển thị thông báo lỗi cho biết vượt quá giới hạn bản ghi và không nhập toàn bộ hoặc chỉ nhập đến giới hạn cho phép.,,PENDING,,
+24,Kiểm tra chức năng thêm dòng bản ghi mới hoạt động chính xác khi click nút 'Thêm bản ghi'.,"Truy cập trang quản lý bản ghi DNS.
+Click vào nút 'Thêm bản ghi'.",Trang quản lý bản ghi DNS.,Một dòng bản ghi trống mới được thêm vào danh sách.,Một dòng bản ghi trống mới được thêm vào danh sách.,PASS,,
+25,Kiểm tra dòng bản ghi mới được thêm ở vị trí chính xác (dòng đầu tiên).,"Truy cập trang quản lý bản ghi DNS có sẵn ít nhất một bản ghi.
+Click vào nút 'Thêm bản ghi'.
+Quan sát vị trí của dòng mới được thêm.",Trang quản lý bản ghi DNS có sẵn ít nhất một bản ghi.,Dòng bản ghi trống mới được thêm vào ở vị trí đầu tiên của danh sách (trên các bản ghi hiện có).,Dòng bản ghi trống mới được thêm vào ở vị trí đầu tiên của danh sách (trên các bản ghi hiện có).,PASS,,
+26,Kiểm tra dòng bản ghi mới thêm vào ở trạng thái edit.,"Truy cập trang quản lý bản ghi DNS.
+Click vào nút 'Thêm bản ghi'.
+Quan sát trạng thái của dòng mới được thêm.",Dòng bản ghi trống mới được thêm.,"Dòng bản ghi trống mới hiển thị các ô nhập liệu (Host, Loại, Giá trị, TTL, v.v.) và các nút 'Xác nhận thay đổi', 'Bỏ qua thay đổi' (chế độ edit).","Dòng bản ghi trống mới hiển thị các ô nhập liệu (Host, Loại, Giá trị, TTL, v.v.) và các nút 'Xác nhận thay đổi', 'Bỏ qua thay đổi' (chế độ edit).",PASS,,
+27,Kiểm tra nút 'Lưu cấu hình' ở trạng thái disable khi chưa có thay đổi nào.,"Truy cập trang quản lý bản ghi DNS.
+Quan sát trạng thái của nút 'Lưu cấu hình'.","Trang quản lý bản ghi DNS vừa load, chưa thực hiện thêm/sửa/xóa bản ghi nào.",Nút 'Lưu cấu hình' ở trạng thái không hoạt động (disable).,Nút 'Lưu cấu hình' ở trạng thái không hoạt động (disable).,PASS,,
+28,Kiểm tra nút 'Lưu cấu hình' tự động enable khi có một bản ghi được cập nhật hoặc thêm hợp lệ.,"Truy cập trang quản lý bản ghi DNS.
+Thêm một bản ghi mới với dữ liệu hợp lệ và click 'Xác nhận thay đổi'.
+Hoặc: Chỉnh sửa một bản ghi hiện có với dữ liệu hợp lệ và click 'Xác nhận thay đổi'.
+Quan sát trạng thái của nút 'Lưu cấu hình'.",Một bản ghi mới hợp lệ được thêm hoặc một bản ghi hiện có được chỉnh sửa hợp lệ.,Nút 'Lưu cấu hình' chuyển sang trạng thái hoạt động (enable).,Nút 'Lưu cấu hình' chuyển sang trạng thái hoạt động (enable).,PASS,,
+29,Kiểm tra chức năng lưu lại toàn bộ cấu hình bản ghi hoạt động chính xác.,"Truy cập trang quản lý bản ghi DNS.
+Thêm một bản ghi mới, chỉnh sửa một bản ghi hiện có, xóa một bản ghi khác.
+Click vào nút 'Lưu cấu hình'.","Các thay đổi (thêm, sửa, xóa) trên nhiều bản ghi.",Hệ thống gửi yêu cầu lưu các thay đổi lên server backend.,Hệ thống gửi yêu cầu lưu các thay đổi lên server backend.,PASS,,
+30,Kiểm tra dữ liệu được lưu chính xác vào database/API sau khi nhấn 'Lưu cấu hình'.,"Thực hiện thêm, sửa, xóa bản ghi và nhấn 'Lưu cấu hình'.
+Sau khi lưu thành công, tải lại trang hoặc kiểm tra dữ liệu thông qua API/database trực tiếp.","Dữ liệu bản ghi sau khi thực hiện thêm, sửa, xóa và lưu.",Dữ liệu bản ghi trên giao diện sau khi tải lại (hoặc từ API/database) phản ánh chính xác các thay đổi đã lưu.,Dữ liệu bản ghi trên giao diện sau khi tải lại (hoặc từ API/database) phản ánh chính xác các thay đổi đã lưu.,PASS,,
+31,Kiểm tra hiển thị thông báo thành công sau khi lưu cấu hình.,"Thực hiện thay đổi bản ghi và nhấn 'Lưu cấu hình'.
+Quan sát giao diện sau khi quá trình lưu hoàn tất.",Lưu cấu hình thành công.,"Một thông báo (ví dụ: popup, banner) hiển thị xác nhận 'Lưu cấu hình thành công'.","Một thông báo (ví dụ: popup, banner) hiển thị xác nhận 'Lưu cấu hình thành công'.",PASS,,
+32,Kiểm tra chức năng tìm kiếm bản ghi theo từ khóa hoạt động chính xác.,"Truy cập trang quản lý bản ghi DNS có nhiều bản ghi.
+Nhập một từ khóa (ví dụ: tên host, giá trị IP) vào ô 'Tìm kiếm bản ghi'.","Danh sách bản ghi DNS.
+Từ khóa tìm kiếm: 'example.com'.","Danh sách bản ghi chỉ hiển thị các bản ghi có chứa từ khóa 'example.com' trong các trường liên quan (Host, Giá trị, v.v.).","Danh sách bản ghi chỉ hiển thị các bản ghi có chứa từ khóa 'example.com' trong các trường liên quan (Host, Giá trị, v.v.).",PASS,,
+33,Kiểm tra kết quả tìm kiếm hiển thị chính xác và đầy đủ.,"Truy cập trang quản lý bản ghi DNS.
+Nhập từ khóa tìm kiếm.
+So sánh kết quả hiển thị với tất cả bản ghi gốc.","Danh sách bản ghi DNS.
+Từ khóa tìm kiếm.",Tất cả các bản ghi chứa từ khóa tìm kiếm đều được hiển thị. Các bản ghi không chứa từ khóa bị ẩn đi.,Tất cả các bản ghi chứa từ khóa tìm kiếm đều được hiển thị. Các bản ghi không chứa từ khóa bị ẩn đi.,PASS,,
+34,Kiểm tra tìm kiếm không phân biệt chữ hoa chữ thường.,"Truy cập trang quản lý bản ghi DNS.
+Nhập từ khóa tìm kiếm bằng chữ thường.
+Nhập lại từ khóa đó bằng chữ hoa hoặc hỗn hợp.","Danh sách bản ghi DNS.
+Từ khóa tìm kiếm: 'mail' và 'MAIL'.",Kết quả tìm kiếm cho 'mail' và 'MAIL' là như nhau.,Kết quả tìm kiếm cho 'mail' và 'MAIL' là như nhau.,PASS,,
+35,"Kiểm tra tìm kiếm theo nhiều trường (Host, Giá trị, TTL, v.v.).","Truy cập trang quản lý bản ghi DNS.
+Nhập từ khóa xuất hiện ở trường Host của một bản ghi.
+Nhập từ khóa xuất hiện ở trường Giá trị của bản ghi khác.","Danh sách bản ghi DNS với từ khóa xuất hiện ở các trường khác nhau.
+Từ khóa tìm kiếm: '192.168.1.1', '3600'.","Kết quả tìm kiếm hiển thị các bản ghi có từ khóa trong bất kỳ trường nào (Host, Giá trị, v.v.).","Kết quả tìm kiếm hiển thị các bản ghi có từ khóa trong bất kỳ trường nào (Host, Giá trị, v.v.).",PASS,,
+36,Kiểm tra hiển thị thông báo khi không tìm thấy bản ghi nào.,"Truy cập trang quản lý bản ghi DNS.
+Nhập một từ khóa tìm kiếm không tồn tại trong bất kỳ bản ghi nào.","Danh sách bản ghi DNS.
+Từ khóa tìm kiếm không tồn tại: 'xyz123abc'.",Giao diện hiển thị thông báo 'Không tìm thấy bản ghi nào phù hợp với từ khóa tìm kiếm.' hoặc tương tự.,Giao diện hiển thị thông báo 'Không tìm thấy bản ghi nào phù hợp với từ khóa tìm kiếm.' hoặc tương tự.,PASS,,
+37,Kiểm tra thông báo tổng số bản ghi và số lượng bản ghi tối đa hiển thị chính xác.,"Truy cập trang quản lý bản ghi DNS.
+Đảm bảo số lượng bản ghi hiện tại đạt hoặc vượt 90% giới hạn.
+Quan sát box thông báo số lượng bản ghi.",Số lượng bản ghi hiện tại và giới hạn bản ghi từ API.,Box thông báo hiển thị chính xác 'Tổng số bản ghi: [số lượng hiện tại] / [số lượng tối đa cho phép]'.,Box thông báo hiển thị chính xác 'Tổng số bản ghi: [số lượng hiện tại] / [số lượng tối đa cho phép]'.,PASS,,
+38,Kiểm tra thông báo chỉ hiển thị khi số lượng bản ghi đạt đến 90% số lượng bản ghi được phép.,"Kiểm tra giới hạn bản ghi (ví dụ: 200).
+Case 1: Số lượng bản ghi < 180.
+Case 2: Số lượng bản ghi >= 180.
+Truy cập trang trong cả hai trường hợp.","Số lượng bản ghi hiện tại: Case 1 (<180), Case 2 (>=180). Giới hạn: 200.","Case 1: Box thông báo số lượng bản ghi không hiển thị.
+Case 2: Box thông báo số lượng bản ghi hiển thị.",Luôn hiển thị,PENDING,,
+39,Kiểm tra thông báo không hiển thị khi khách hàng đã mua dịch vụ bản ghi (trừ khi đạt 90% của gói kế tiếp).,"Kiểm tra với tài khoản đã mua gói bản ghi bổ sung, nâng giới hạn lên cao hơn (ví dụ: 500).
+Case 1: Số lượng bản ghi hiện tại < 90% của gói mới (ví dụ: < 450).
+Case 2: Số lượng bản ghi hiện tại >= 90% của gói mới (ví dụ: >= 450).
+Truy cập trang trong cả hai trường hợp.","Tài khoản đã mua gói bản ghi bổ sung. Số lượng bản ghi hiện tại: Case 1 (<450), Case 2 (>=450). Giới hạn mới: 500.","Case 1: Box thông báo số lượng bản ghi không hiển thị.
+Case 2: Box thông báo số lượng bản ghi hiển thị.",Luôn hiển thị,PENDING,,
+40,"Kiểm tra khi click vào icon 'Chỉnh sửa', dòng bản ghi tương ứng chuyển sang mode edit.","Truy cập trang quản lý bản ghi DNS.
+Click vào icon 'Chỉnh sửa' của một bản ghi hiện có.",Một bản ghi DNS hiện có.,"Dòng bản ghi được click chuyển từ trạng thái đọc (read-only) sang trạng thái chỉnh sửa (edit mode), các trường dữ liệu trở thành ô nhập liệu.","Dòng bản ghi được click chuyển từ trạng thái đọc (read-only) sang trạng thái chỉnh sửa (edit mode), các trường dữ liệu trở thành ô nhập liệu.",PASS,,
+41,Kiểm tra các giá trị gốc của bản ghi trước khi edit được ghi nhận lại.,"Truy cập trang quản lý bản ghi DNS.
+Ghi lại giá trị hiện tại của một bản ghi.
+Click vào icon 'Chỉnh sửa' của bản ghi đó.
+Thay đổi giá trị trong các ô nhập liệu.
+Click nút 'Khôi phục'.","Một bản ghi DNS hiện có.
+Giá trị gốc của bản ghi.","Sau khi click "" Khôi phục', các giá trị trong dòng bản ghi trở về giá trị gốc đã ghi nhận trước khi vào mode edit.","Sau khi click "" Khôi phục', các giá trị trong dòng bản ghi trở về giá trị gốc đã ghi nhận trước khi vào mode edit.",PASS,,
+42,"Kiểm tra nếu bản ghi đang edit không hợp lệ, hiển thị lỗi và không cho chuyển sang edit bản ghi khác.","Truy cập trang quản lý bản ghi DNS.
+Click 'Chỉnh sửa' bản ghi A.
+Thay đổi dữ liệu trên bản ghi A thành không hợp lệ (ví dụ: nhập IP sai định dạng).
+Click 'Chỉnh sửa' bản ghi B.",Hai bản ghi DNS hiện có (A và B). Bản ghi A đang ở mode edit với dữ liệu không hợp lệ.,Hệ thống hiển thị thông báo lỗi validation cho bản ghi A và bản ghi B không chuyển sang mode edit. Bản ghi A vẫn ở mode edit.,Hệ thống hiển thị thông báo lỗi validation cho bản ghi A và bản ghi B không chuyển sang mode edit. Bản ghi A vẫn ở mode edit.,PASS,,
+43,"Kiểm tra trong mode edit, nút 'Chỉnh sửa' bị ẩn và thay bằng 'Khôi phục' và 'Xóa'.","Truy cập trang quản lý bản ghi DNS.
+Click vào icon 'Chỉnh sửa' của một bản ghi.",Một bản ghi DNS hiện có.,"Trong dòng bản ghi đang ở mode edit, icon 'Chỉnh sửa' và 'Xóa' biến mất và thay thế bằng hai nút 'Khôi phục' và 'Xóa'.","Trong dòng bản ghi đang ở mode edit, icon 'Chỉnh sửa' và 'Xóa' biến mất và thay thế bằng hai nút 'Khôi phục' và 'Xóa'.",PASS,,
+44,"Kiểm tra khi nhấn 'Lưu bản ghi', hệ thống thực hiện validate nội dung bản ghi.","Truy cập trang quản lý bản ghi DNS.
+Click 'Chỉnh sửa' một bản ghi.
+Thay đổi dữ liệu thành không hợp lệ (ví dụ: nhập chữ vào trường TTL).
+Click nút 'Lưu bản ghi'.",Bản ghi ở mode edit với dữ liệu không hợp lệ.,Hệ thống thực hiện kiểm tra tính hợp lệ của dữ liệu đã nhập.,Hệ thống thực hiện kiểm tra tính hợp lệ của dữ liệu đã nhập.,PASS,,
+45,"Kiểm tra nếu dữ liệu không hợp lệ khi xác nhận, hiển thị lỗi và giữ nguyên mode edit.","Truy cập trang quản lý bản ghi DNS.
+Click 'Chỉnh sửa' một bản ghi.
+Thay đổi dữ liệu thành không hợp lệ (ví dụ: nhập IP sai định dạng cho bản ghi A).
+Click nút 'Xác nhận thay đổi'.",Bản ghi loại A ở mode edit với giá trị IP sai định dạng.,Hệ thống hiển thị thông báo lỗi validation (ví dụ: 'Địa chỉ IP không hợp lệ') và dòng bản ghi vẫn ở mode edit.,Hệ thống hiển thị thông báo lỗi validation (ví dụ: 'Địa chỉ IP không hợp lệ') và dòng bản ghi vẫn ở mode edit.,PASS,,
+46,"Kiểm tra sau khi xác nhận thay đổi thành công, bản ghi chuyển về read-only mode.","Truy cập trang quản lý bản ghi DNS.
+Click 'Chỉnh sửa' một bản ghi.
+Thay đổi dữ liệu thành hợp lệ.
+Click nút 'Xác nhận thay đổi'.
+Quan sát trạng thái của dòng bản ghi.",Bản ghi ở mode edit với dữ liệu hợp lệ đã thay đổi.,"Dòng bản ghi chuyển về trạng thái đọc (read-only), hiển thị dữ liệu mới và các icon 'Chỉnh sửa', 'Xóa'.","Dòng bản ghi chuyển về trạng thái đọc (read-only), hiển thị dữ liệu mới và các icon 'Chỉnh sửa', 'Xóa'.",PASS,,
+47,"Kiểm tra sau khi bỏ qua thay đổi, bản ghi chuyển về read-only mode và hiển thị lại nút 'Chỉnh sửa'.","Truy cập trang quản lý bản ghi DNS.
+Click 'Chỉnh sửa' một bản ghi.
+Thay đổi giá trị.
+Click nút 'Bỏ qua thay đổi'.
+Quan sát trạng thái của dòng bản ghi.",Bản ghi ở mode edit với giá trị đã thay đổi.,"Dòng bản ghi chuyển về trạng thái đọc (read-only), hiển thị giá trị gốc và các icon 'Chỉnh sửa', 'Xóa'.","Dòng bản ghi chuyển về trạng thái đọc (read-only), hiển thị giá trị gốc và các icon 'Chỉnh sửa', 'Xóa'.",PASS,,
+48,"Kiểm tra khi click icon 'Xóa', bản ghi bị xóa ngay lập tức mà không cần popup xác nhận.","Truy cập trang quản lý bản ghi DNS có ít nhất một bản ghi.
+Click vào icon 'Xóa' của một bản ghi.",Một bản ghi DNS hiện có.,"Bản ghi được click icon 'Xóa' biến mất khỏi danh sách hiển thị ngay lập tức, không có popup xác nhận hiện ra.","Bản ghi được click icon 'Xóa' biến mất khỏi danh sách hiển thị ngay lập tức, không có popup xác nhận hiện ra.",PASS,,
+49,Kiểm tra bản ghi được xóa khỏi danh sách trên giao diện và được đánh dấu để xóa khi lưu.,"Truy cập trang quản lý bản ghi DNS.
+Click vào icon 'Xóa' của một bản ghi.
+Quan sát danh sách bản ghi.
+Click 'Lưu cấu hình'.
+Tải lại trang hoặc kiểm tra API/database.",Một bản ghi DNS hiện có.,"Bản ghi bị xóa biến mất khỏi danh sách trên giao diện.
+Nút 'Lưu cấu hình' chuyển sang trạng thái enable.
+Sau khi lưu và tải lại trang, bản ghi đó không còn tồn tại.","Bản ghi bị xóa biến mất khỏi danh sách trên giao diện.
+Nút 'Lưu cấu hình' chuyển sang trạng thái enable.
+Sau khi lưu và tải lại trang, bản ghi đó không còn tồn tại.",PASS,,
+50,Kiểm tra validate dữ liệu nhập cho trường 'Giá trị' theo loại bản ghi.,"Thêm mới hoặc chỉnh sửa các bản ghi với các loại khác nhau (A, CNAME, MX, TXT, v.v.).
+Nhập các giá trị hợp lệ và không hợp lệ vào trường 'Giá trị' tương ứng với từng loại (ví dụ: IP hợp lệ/không hợp lệ cho A/AAAA, tên miền hợp lệ/không hợp lệ cho CNAME/MX/NS, chuỗi text cho TXT).
+Click 'Xác nhận thay đổi'.",Các giá trị 'Giá trị' hợp lệ và không hợp lệ cho các loại bản ghi khác nhau.,Hệ thống hiển thị thông báo lỗi khi nhập 'Giá trị' không hợp lệ với loại bản ghi đã chọn.,Hệ thống hiển thị thông báo lỗi khi nhập 'Giá trị' không hợp lệ với loại bản ghi đã chọn.,PASS,,
+51,Kiểm tra validate dữ liệu nhập cho trường 'TTL'.,"Thêm mới hoặc chỉnh sửa một bản ghi.
+Nhập các giá trị khác nhau vào trường 'TTL' (ví dụ: số dương hợp lệ, số âm, số 0, chữ, số quá lớn).
+Click 'Xác nhận thay đổi'.",Các giá trị 'TTL' hợp lệ và không hợp lệ.,"Hệ thống hiển thị thông báo lỗi khi nhập 'TTL' không hợp lệ (ví dụ: không phải số, số âm, số ngoài phạm vi cho phép).","Hệ thống hiển thị thông báo lỗi khi nhập 'TTL' không hợp lệ (ví dụ: không phải số, số âm, số ngoài phạm vi cho phép).",PASS,,
+52,Kiểm tra validate dữ liệu nhập cho trường 'Ưu tiên' (khi hiển thị).,"Thêm mới hoặc chỉnh sửa bản ghi loại MX hoặc SRV.
+Nhập các giá trị khác nhau vào trường 'Ưu tiên' (ví dụ: số nguyên dương hợp lệ, số âm, số thập phân, chữ).
+Click 'Xác nhận thay đổi'.",Các giá trị 'Ưu tiên' hợp lệ và không hợp lệ cho bản ghi MX/SRV.,Hệ thống hiển thị thông báo lỗi khi nhập 'Ưu tiên' không hợp lệ (ví dụ: không phải số nguyên dương).,Hệ thống hiển thị thông báo lỗi khi nhập 'Ưu tiên' không hợp lệ (ví dụ: không phải số nguyên dương).,PASS,,
+53,Kiểm tra validate dữ liệu nhập cho trường 'Flags' và 'Tag' (khi hiển thị cho CAA).,"Thêm mới hoặc chỉnh sửa bản ghi loại CAA.
+Nhập các giá trị khác nhau vào trường 'Flags' và 'Tag' theo quy định của CAA.
+Click 'Xác nhận thay đổi'.",Các giá trị 'Flags' và 'Tag' hợp lệ và không hợp lệ cho bản ghi CAA.,Hệ thống hiển thị thông báo lỗi khi nhập 'Flags' hoặc 'Tag' không hợp lệ với định dạng CAA record.,Hệ thống hiển thị thông báo lỗi khi nhập 'Flags' hoặc 'Tag' không hợp lệ với định dạng CAA record.,PASS,,
+54,Kiểm tra validate dữ liệu nhập cho trường 'Host' theo quy tắc DNS.,"Thêm mới hoặc chỉnh sửa một bản ghi.
+Nhập các giá trị khác nhau vào trường 'Host' (ví dụ: '@', 'www', 'sub.domain', 'host có ký tự đặc biệt', 'host quá dài').
+Click 'Xác nhận thay đổi'.",Các giá trị 'Host' hợp lệ và không hợp lệ.,Hệ thống hiển thị thông báo lỗi khi nhập 'Host' không hợp lệ theo quy tắc đặt tên miền/hostname.,Hệ thống hiển thị thông báo lỗi khi nhập 'Host' không hợp lệ theo quy tắc đặt tên miền/hostname.,PASS,,
+55,Kiểm tra hiển thị thông báo lỗi rõ ràng khi dữ liệu nhập không hợp lệ.,"Thêm mới hoặc chỉnh sửa một bản ghi với dữ liệu không hợp lệ.
+Click 'Xác nhận thay đổi'.
+Quan sát thông báo lỗi hiển thị.",Bản ghi ở mode edit với dữ liệu không hợp lệ.,"Thông báo lỗi hiển thị rõ ràng, dễ hiểu, chỉ ra trường nào bị lỗi và lý do lỗi (ví dụ: 'Địa chỉ IP không đúng định dạng', 'TTL phải là số nguyên dương'). Thông báo có thể hiển thị ngay dưới trường lỗi hoặc ở đầu dòng/form.","Thông báo lỗi hiển thị rõ ràng, dễ hiểu, chỉ ra trường nào bị lỗi và lý do lỗi (ví dụ: 'Địa chỉ IP không đúng định dạng', 'TTL phải là số nguyên dương'). Thông báo có thể hiển thị ngay dưới trường lỗi hoặc ở đầu dòng/form.",PASS,,
+56,Kiểm tra validate độ dài tối đa cho phép của từng field.,"Thêm mới hoặc chỉnh sửa một bản ghi.
+Nhập dữ liệu vượt quá độ dài tối đa cho phép vào các trường (Host, Giá trị, v.v.).
+Click 'Xác nhận thay đổi'.",Dữ liệu nhập vượt quá độ dài tối đa cho phép.,Hệ thống hiển thị thông báo lỗi cho biết dữ liệu vượt quá độ dài cho phép và không cho xác nhận/lưu.,Hệ thống hiển thị thông báo lỗi cho biết dữ liệu vượt quá độ dài cho phép và không cho xác nhận/lưu.,PASS,,
+57,Kiểm tra validate các ký tự đặc biệt không được phép trong từng field.,"Thêm mới hoặc chỉnh sửa một bản ghi.
+Nhập các ký tự đặc biệt không được phép vào các trường (Host, Giá trị, v.v.).
+Click 'Xác nhận thay đổi'.",Dữ liệu nhập chứa ký tự đặc biệt không hợp lệ.,Hệ thống hiển thị thông báo lỗi cho biết dữ liệu chứa ký tự không hợp lệ và không cho xác nhận/lưu.,Hệ thống hiển thị thông báo lỗi cho biết dữ liệu chứa ký tự không hợp lệ và không cho xác nhận/lưu.,PASS,,
+58,"Kiểm tra khi nhấn 'Enter' hoặc 'Tab' trong khi nhập liệu, focus chuyển sang control kế tiếp.","Thêm mới hoặc chỉnh sửa một bản ghi để vào mode edit.
+Nhập dữ liệu vào trường 'Host'.
+Nhấn phím 'Tab' hoặc 'Enter'.",Bản ghi ở mode edit.,"Focus di chuyển từ trường 'Host' sang trường 'Loại'. Lặp lại với các trường tiếp theo, focus di chuyển theo thứ tự: Host -> Loại -> Giá trị -> TTL -> Ưu tiên (nếu hiển thị) -> Xác nhận thay đổi.","Focus di chuyển từ trường 'Host' sang trường 'Loại'. Lặp lại với các trường tiếp theo, focus di chuyển theo thứ tự: Host -> Loại -> Giá trị -> TTL -> Ưu tiên (nếu hiển thị) -> Xác nhận thay đổi.",PASS,,
+59,"Kiểm tra khi đang ở control cuối cùng trong record đang thao tác với dữ liệu không hợp lệ, tự động validate và thông báo lỗi.","Thêm mới hoặc chỉnh sửa một bản ghi để vào mode edit.
+Điền dữ liệu không hợp lệ vào một trường bất kỳ.
+Điền dữ liệu vào trường cuối cùng (ví dụ: TTL hoặc Ưu tiên).
+Khi đang ở trường cuối cùng, nhấn phím 'Tab' hoặc 'Enter'.","Bản ghi ở mode edit với dữ liệu không hợp lệ, focus đang ở trường cuối cùng.",Hệ thống tự động thực hiện validate bản ghi. Hiển thị thông báo lỗi validation và dòng bản ghi vẫn ở mode edit.,Hệ thống tự động thực hiện validate bản ghi. Hiển thị thông báo lỗi validation và dòng bản ghi vẫn ở mode edit.,PASS,,
+60,"Kiểm tra khi đang ở control cuối cùng trong record đang thao tác, tự động validate và thêm dòng mới/thông báo lỗi.","Thêm mới hoặc chỉnh sửa một bản ghi để vào mode edit.
+Điền dữ liệu hợp lệ vào tất cả các trường, bao gồm cả trường cuối cùng (ví dụ: TTL hoặc Ưu tiên).
+Khi đang ở trường cuối cùng, nhấn phím 'Tab' hoặc 'Enter'.","Bản ghi ở mode edit với dữ liệu hợp lệ, focus đang ở trường cuối cùng.","Hệ thống tự động thực hiện validate bản ghi. Nếu hợp lệ, bản ghi được xác nhận (chuyển về read-only, thêm vào queue) và một dòng trống mới hiển thị ở đầu danh sách.","Hệ thống tự động thực hiện validate bản ghi. Nếu hợp lệ, bản ghi được xác nhận (chuyển về read-only, thêm vào queue) và một dòng trống mới hiển thị ở đầu danh sách.",PASS,,
+61,Kiểm tra giới hạn số lượng bản ghi tối đa được phép tạo.,"Xác định giới hạn số lượng bản ghi tối đa cho gói dịch vụ.
+Thêm bản ghi mới cho đến khi đạt giới hạn.
+Cố gắng thêm bản ghi thứ N+1 (với N là giới hạn tối đa).",Số lượng bản ghi hiện tại đạt giới hạn tối đa.,Hệ thống ngăn không cho thêm bản ghi mới khi đã đạt giới hạn tối đa và hiển thị thông báo tương ứng.,Cho phép nhập hơn 200 bản ghi,PENDING,,
+62,Kiểm tra xử lý các trường dữ liệu chứa các ký tự đặc biệt được phép và không được phép.,"Thêm mới hoặc chỉnh sửa bản ghi.
+Nhập dữ liệu vào các trường (Host, Giá trị, v.v.) chứa các ký tự đặc biệt được quy định là hợp lệ (ví dụ: '-', '.', '*') và các ký tự không được phép.
+Click 'Xác nhận thay đổi'.",Dữ liệu chứa các ký tự đặc biệt hợp lệ và không hợp lệ.,Hệ thống chấp nhận các giá trị chứa ký tự đặc biệt hợp lệ và hiển thị thông báo lỗi khi gặp ký tự không được phép.,Hệ thống chấp nhận các giá trị chứa ký tự đặc biệt hợp lệ và hiển thị thông báo lỗi khi gặp ký tự không được phép.,PASS,,
+63,"Kiểm tra luồng thêm mới, chỉnh sửa, xóa bản ghi hoạt động chính xác tuần tự.","Truy cập trang quản lý bản ghi DNS.
+Thêm một bản ghi mới hợp lệ.
+Chỉnh sửa bản ghi vừa thêm.
+Xóa bản ghi đó.
+Thêm lại một bản ghi khác.
+Lưu cấu hình.",Thực hiện chuỗi thao tác thêm -> sửa -> xóa -> thêm -> lưu.,"Các thao tác thêm, sửa, xóa diễn ra thành công theo trình tự. Dữ liệu hiển thị trên giao diện đúng sau mỗi bước. Lưu cấu hình thành công và dữ liệu trên backend được cập nhật chính xác.","Các thao tác thêm, sửa, xóa diễn ra thành công theo trình tự. Dữ liệu hiển thị trên giao diện đúng sau mỗi bước. Lưu cấu hình thành công và dữ liệu trên backend được cập nhật chính xác.",PASS,,
+64,Kiểm tra luồng nhập/xuất file CSV hoạt động chính xác.,"Truy cập trang quản lý bản ghi DNS có sẵn dữ liệu.
+Xuất file CSV.
+Chỉnh sửa file CSV vừa xuất (thêm, sửa, xóa dòng).
+Nhập lại file CSV đã chỉnh sửa.",File CSV được xuất và chỉnh sửa.,Xuất file CSV thành công với dữ liệu chính xác. Nhập file CSV thành công và các thay đổi từ file được hiển thị đúng trên giao diện (ở trạng thái chờ lưu).,,PENDING,,
+65,Kiểm tra luồng tìm kiếm bản ghi hoạt động chính xác sau khi thực hiện các thao tác khác.,"Truy cập trang quản lý bản ghi DNS.
+Xóa một bản ghi.
+Thực hiện tìm kiếm bản ghi vừa xóa.",Xóa bản ghi.,Không tìm thấy bản ghi vừa xóa trong kết quả tìm kiếm.,Không tìm thấy bản ghi vừa xóa trong kết quả tìm kiếm.,PASS,,
+66,Kiểm tra luồng tìm kiếm bản ghi hoạt động chính xác sau khi thực hiện các thao tác khác.,"Truy cập trang quản lý bản ghi DNS.
+Chỉnh sửa một bản ghi.
+Thực hiện tìm kiếm bản ghi vừa chỉnh sửa (dựa trên giá trị mới).",Chỉnh sửa bản ghi.,Bản ghi đã chỉnh sửa được tìm thấy dựa trên giá trị mới và hiển thị chính xác.,Bản ghi đã chỉnh sửa được tìm thấy dựa trên giá trị mới và hiển thị chính xác.,PASS,,
+67,Kiểm tra luồng tìm kiếm bản ghi hoạt động chính xác sau khi thực hiện các thao tác khác.,"Truy cập trang quản lý bản ghi DNS.
+Thêm một bản ghi mới.
+Thực hiện tìm kiếm bản ghi vừa thêm.",Thêm bản ghi mới.,Bản ghi vừa thêm được tìm thấy và hiển thị chính xác trong kết quả tìm kiếm.,Bản ghi vừa thêm được tìm thấy và hiển thị chính xác trong kết quả tìm kiếm.,PASS,,

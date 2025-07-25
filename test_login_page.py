@@ -325,6 +325,9 @@ class LoginPageTest:
         self.test_failed_login_wrong_credentials()
         self.test_failed_login_validation_errors()
         self.test_additional_security_checks()
+        self.test_login_status_redirect_dang_nhap()
+        self.test_login_status_redirect_quen_mat_khau()
+        self.test_combined_login_status_redirects()
         
         # Print summary
         print("-" * 60)
@@ -344,6 +347,176 @@ class LoginPageTest:
         self.teardown()
         
         return report_file
+    
+    def test_login_status_redirect_dang_nhap(self):
+        test_name = "Login status redirect - /dang-nhap"
+        try:
+            self.setup_test()
+            username_field = self.driver.find_element(By.XPATH, config.xpathusername)
+            password_field = self.driver.find_element(By.XPATH, config.xpathpassword)
+            login_button = self.driver.find_element(By.XPATH, config.xpathloginbtn)
+            
+            username_field.clear()
+            username_field.send_keys(config.DOMAIN)
+            password_field.clear()
+            password_field.send_keys(config.PASSWORD)
+            
+            login_button.click()
+            time.sleep(3)
+            
+            try:
+                welcome_element = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//header[@class='section__header']//p[1]"))
+                )
+                if not welcome_element.is_displayed():
+                    self.log_result(test_name, False, "Login failed - cannot test redirect")
+                    return
+            except TimeoutException:
+                self.log_result(test_name, False, "Login failed - cannot test redirect")
+                return
+            
+            login_page_url = "https://access-ote.pavietnam.vn/dang-nhap"
+            self.driver.get(login_page_url)
+            time.sleep(3)
+            
+            current_url = self.driver.current_url
+            
+            if '/dang-nhap' not in current_url:
+                try:
+                    welcome_element = self.driver.find_element(By.XPATH, "//header[@class='section__header']//p[1]")
+                    if welcome_element.is_displayed():
+                        self.log_result(test_name, True, f"Successfully redirected from /dang-nhap to {current_url}")
+                    else:
+                        self.log_result(test_name, False, "Redirected but not to expected homepage")
+                except NoSuchElementException:
+                    self.log_result(test_name, False, "Redirected but welcome element not found")
+            else:
+                self.log_result(test_name, False, f"Not redirected - still on login page: {current_url}")
+                
+        except Exception as e:
+            self.log_result(test_name, False, str(e))
+    
+    def test_login_status_redirect_quen_mat_khau(self):
+        test_name = "Login status redirect - /quen-mat-khau"
+        try:
+            self.setup_test()
+            
+            # Login with valid credentials
+            username_field = self.driver.find_element(By.XPATH, config.xpathusername)
+            password_field = self.driver.find_element(By.XPATH, config.xpathpassword)
+            login_button = self.driver.find_element(By.XPATH, config.xpathloginbtn)
+            
+            username_field.clear()
+            username_field.send_keys(config.DOMAIN)
+            password_field.clear()
+            password_field.send_keys(config.PASSWORD)
+            
+            login_button.click()
+            time.sleep(3)
+            
+            # Verify login was successful by checking for welcome element
+            try:
+                welcome_element = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//header[@class='section__header']//p[1]"))
+                )
+                if not welcome_element.is_displayed():
+                    self.log_result(test_name, False, "Login failed - cannot test redirect")
+                    return
+            except TimeoutException:
+                self.log_result(test_name, False, "Login failed - cannot test redirect")
+                return
+            
+            # Now try to access /quen-mat-khau while logged in
+            forgot_password_url = "https://access-ote.pavietnam.vn/quen-mat-khau"
+            self.driver.get(forgot_password_url)
+            time.sleep(3)
+            
+            # Check if redirected to homepage (should not be on forgot password page)
+            current_url = self.driver.current_url
+            
+            # If redirected, should not contain '/quen-mat-khau' in URL
+            if '/quen-mat-khau' not in current_url:
+                # Verify we're on homepage by checking for welcome element
+                try:
+                    welcome_element = self.driver.find_element(By.XPATH, "//header[@class='section__header']//p[1]")
+                    if welcome_element.is_displayed():
+                        self.log_result(test_name, True, f"Successfully redirected from /quen-mat-khau to {current_url}")
+                    else:
+                        self.log_result(test_name, False, "Redirected but not to expected homepage")
+                except NoSuchElementException:
+                    self.log_result(test_name, False, "Redirected but welcome element not found")
+            else:
+                self.log_result(test_name, False, f"Not redirected - still on forgot password page: {current_url}")
+                
+        except Exception as e:
+            self.log_result(test_name, False, str(e))
+    
+    def test_combined_login_status_redirects(self):
+        test_name = "Combined login status redirects"
+        try:
+            self.setup_test()
+            
+            username_field = self.driver.find_element(By.XPATH, config.xpathusername)
+            password_field = self.driver.find_element(By.XPATH, config.xpathpassword)
+            login_button = self.driver.find_element(By.XPATH, config.xpathloginbtn)
+            
+            username_field.clear()
+            username_field.send_keys(config.DOMAIN)
+            password_field.clear()
+            password_field.send_keys(config.PASSWORD)
+            
+            login_button.click()
+            time.sleep(3)
+            
+            # Verify login was successful
+            try:
+                welcome_element = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, "//header[@class='section__header']//p[1]"))
+                )
+                if not welcome_element.is_displayed():
+                    self.log_result(test_name, False, "Login failed - cannot test redirects")
+                    return
+            except TimeoutException:
+                self.log_result(test_name, False, "Login failed - cannot test redirects")
+                return
+            
+            # Test both redirect scenarios
+            redirect_tests = [
+                {"url": "https://access-ote.pavietnam.vn/dang-nhap", "page_name": "login page"},
+                {"url": "https://access-ote.pavietnam.vn/quen-mat-khau", "page_name": "forgot password page"}
+            ]
+            
+            all_redirects_successful = True
+            redirect_results = []
+            
+            for redirect_test in redirect_tests:
+                self.driver.get(redirect_test["url"])
+                time.sleep(2)
+                
+                current_url = self.driver.current_url
+                page_path = redirect_test["url"].split("/")[-1]
+                
+                if page_path not in current_url:
+                    # Check if we're on homepage
+                    try:
+                        welcome_element = self.driver.find_element(By.XPATH, "//header[@class='section__header']//p[1]")
+                        if welcome_element.is_displayed():
+                            redirect_results.append(f" {redirect_test['page_name']} redirect successful")
+                        else:
+                            redirect_results.append(f" {redirect_test['page_name']} redirected but not to homepage")
+                            all_redirects_successful = False
+                    except NoSuchElementException:
+                        redirect_results.append(f" {redirect_test['page_name']} redirected but welcome element not found")
+                        all_redirects_successful = False
+                else:
+                    redirect_results.append(f" {redirect_test['page_name']} redirect failed")
+                    all_redirects_successful = False
+            
+            result_message = "; ".join(redirect_results)
+            self.log_result(test_name, all_redirects_successful, result_message)
+                
+        except Exception as e:
+            self.log_result(test_name, False, str(e))
 
 
 if __name__ == "__main__":
